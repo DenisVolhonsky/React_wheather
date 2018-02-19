@@ -19,7 +19,7 @@ export default class App extends React.Component {
 
 
     currentFormSubmit = (query) => {
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=ee60a56d516461352f04a28877459c45`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=ee60a56d516461352f04a28877459c45`)
             .then(response=>{
                 if(response.ok) return response.json();
                 throw new Error('Fetching error'+ response.statusText);
@@ -42,7 +42,7 @@ export default class App extends React.Component {
 
 
     componentWillMount = () => {
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=Kiev&APPID=ee60a56d516461352f04a28877459c45`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=Kiev&APPID=ee60a56d516461352f04a28877459c45`)
             .then(response=>{
                 if(response.ok) return response.json();
                 throw new Error('Fetching error'+ response.statusText);
