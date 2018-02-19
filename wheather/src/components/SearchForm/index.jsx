@@ -1,23 +1,24 @@
 import React from 'react';
+
 import {Button} from 'react-materialize';
 import './style.css'
 
-export default class SearchForm extends React.Component {
+const SearchForm = ({getWheather}) => {
+    let input = null;
 
-    _handleSubmit = (event) => {
+    const onFormSubmit = (event) => {
         event.preventDefault();
-        console.log('wow');
+        getWheather(input.value);
+        event.target.reset();
     }
 
-    render() {
         return(
-            <form className="SearchField" onSubmit={this._handleSubmit}>
+            <form className="SearchField" onSubmit={onFormSubmit}>
                 <span>Enter the city:</span>
-                <input type="text"/>
+                <input type="text" ref={node => (input=node)}/>
                 <Button>Submit</Button>
             </form>
         );
-    }
 }
 
-
+export default  SearchForm;

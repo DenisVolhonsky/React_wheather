@@ -17,9 +17,29 @@ export default class App extends React.Component {
 
     };
 
+    handleFormSubmit = (query) => {
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=ee60a56d516461352f04a28877459c45`)
+            .then(response=>{
+                if(response.ok) return response.json();
+                throw new Error('Fetching error'+ response.statusText);
+            })
+            .then(data => {
+                this.setState({
+                    name: data.name,
+                    temp: Math.round(data.main.temp-273),
+                    humidity: data.main.humidity,
+                    pressure: Math.round(data.main.pressure*0.75),
+                    visibility: data.visibility/1000,
+                    wind: data.wind.speed,
+                    clouds: data.weather[0].description,
+                    icon: `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
+                });
+            })
+            .catch(err => console.log(err));
+    }
 
     componentWillMount = () => {
-        fetch('http://api.openweathermap.org/data/2.5/weather?q=London&APPID=ee60a56d516461352f04a28877459c45')
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=Kiev&APPID=ee60a56d516461352f04a28877459c45`)
             .then(response=>{
                 if(response.ok) return response.json();
                 throw new Error('Fetching error'+ response.statusText);
@@ -43,7 +63,7 @@ export default class App extends React.Component {
         return(
             <div className="container">
                 <Header />
-                <SearchForm />
+                <SearchForm getWheather={this.handleFormSubmit}/>
                 <CurrentWheather {...this.state} />
             </div>
         );
