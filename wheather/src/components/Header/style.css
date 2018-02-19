@@ -10,18 +10,3 @@
     text-decoration: none;
     color: #3F51B5;
 }
-.navbar__list {
-    display: inline-block;
-    margin-left: 20px;
-    list-style-type: none;
-
-}
-.navbar__list>a {
-    text-decoration: none;
-    color: #424242;
-    font-size: 25px;
-
-}
-.navbar__list>a:hover {
-    color: #9E9E9E;
-}

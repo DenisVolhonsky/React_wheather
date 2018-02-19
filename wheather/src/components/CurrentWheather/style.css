@@ -1,0 +1,10 @@
+.CurrentWheather {
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-left: 40px;
+    width: 250px;
+    border: 1px solid #cfcfcf;
+}
+.WheatherPic {
+    padding-left: 40px;
+}

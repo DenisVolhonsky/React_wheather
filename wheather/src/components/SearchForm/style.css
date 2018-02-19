@@ -1,0 +1,9 @@
+.SearchField {
+    margin: 0 auto;
+    text-align: center;
+    width: 110px;
+}
+.SearchField input {
+    text-align: center;
+}
+
