@@ -17,7 +17,8 @@ export default class App extends React.Component {
 
     };
 
-    handleFormSubmit = (query) => {
+
+    currentFormSubmit = (query) => {
         fetch(`http://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=ee60a56d516461352f04a28877459c45`)
             .then(response=>{
                 if(response.ok) return response.json();
@@ -37,6 +38,8 @@ export default class App extends React.Component {
             })
             .catch(err => console.log(err));
     }
+
+
 
     componentWillMount = () => {
         fetch(`http://api.openweathermap.org/data/2.5/weather?q=Kiev&APPID=ee60a56d516461352f04a28877459c45`)
@@ -63,7 +66,7 @@ export default class App extends React.Component {
         return(
             <div className="container">
                 <Header />
-                <SearchForm getWheather={this.handleFormSubmit}/>
+                <SearchForm getWheather={this.currentFormSubmit}/>
                 <CurrentWheather {...this.state} />
             </div>
         );

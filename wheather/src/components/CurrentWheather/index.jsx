@@ -1,12 +1,10 @@
 import React from 'react';
 import './style.css'
 
-export default class CurrentWheather extends React.Component {
-
-    render() {
-        const {name, temp, humidity, pressure, visibility, wind, clouds, icon} = this.props;
+const CurrentWheather = ({name, temp, humidity, pressure, visibility, wind, clouds, icon}) => {
         return(
             <div className="CurrentWheather">
+                <p><b>Текущая погода</b></p>
                 <p>Название города: <b>{name}</b></p>
                 <p>Температура: <b>{temp}&deg;С</b></p>
                 <p>Влажность: <b>{humidity}%</b></p>
@@ -17,5 +15,6 @@ export default class CurrentWheather extends React.Component {
                 <p><img className="WheatherPic" src={icon} alt="wheather_icon" /></p>
             </div>
         );
-    }
 }
+
+export default CurrentWheather;
