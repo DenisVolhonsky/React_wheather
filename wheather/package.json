@@ -14,5 +14,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://denisvolhonsky.github.io/React_wheather/build/"
+  "homepage": "https://denisvolhonsky.github.io/React_wheather/wheather/build/"
 }
