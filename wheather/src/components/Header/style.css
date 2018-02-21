@@ -2,11 +2,11 @@
     display: flex;
     margin-bottom: 20px;
     height: 60px;
-    border-bottom: 4px solid #3F51B5;
+    border-bottom: 4px solid #26A69A;
     justify-content: space-between;
     align-items: center;
 }
 .header__logo {
     text-decoration: none;
-    color: #3F51B5;
+    color: #26A69A;
 }

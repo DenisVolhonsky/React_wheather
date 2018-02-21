@@ -4,7 +4,9 @@
     padding-left: 40px;
     width: 250px;
     border: 1px solid #cfcfcf;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 .WheatherPic {
     padding-left: 40px;
 }
+

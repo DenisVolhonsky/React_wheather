@@ -4,7 +4,7 @@ import {Button} from 'react-materialize';
 import './style.css'
 
 const SearchForm = ({getWheather}) => {
-    let input = null;
+    let input = '';
 
     const onFormSubmit = (event) => {
         event.preventDefault();

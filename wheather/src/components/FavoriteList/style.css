@@ -1,0 +1,45 @@
+.favorite {
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-left: 40px;
+    width: 250px;
+    min-height:50px;
+    border: 1px solid #cfcfcf;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.favorite__title {
+    color: #26A69A;
+}
+.favorite__item {
+    position: relative;
+}
+
+.favorite__item:hover {
+    color: #9E9E9E;
+    cursor: pointer;
+}
+.delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    opacity: 0.5;
+}
+.delete-btn:hover {
+    opacity: 1;
+}
+.delete-btn:before, .delete-btn:after {
+    position: absolute;
+    left: 10px;
+    content: ' ';
+    height: 8px;
+    width: 2px;
+    background-color: #333;
+}
+.delete-btn:before {
+    transform: rotate(45deg);
+}
+.delete-btn:after {
+    transform: rotate(-45deg);
+}

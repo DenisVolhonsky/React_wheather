@@ -1,0 +1,17 @@
+.ForecastWheather {
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-left: 30px;
+    width: 200px;
+    border: 1px solid #cfcfcf;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.WheatherPic {
+    padding-left: 40px;
+}
+.ForecastWheather__field {
+    font-size: 12px;
+}
+.ForecastWheather__data {
+    color: #26A69A;
+}
