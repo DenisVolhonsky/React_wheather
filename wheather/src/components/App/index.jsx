@@ -5,14 +5,15 @@ import SearchForm from 'components/SearchForm';
 import CurrentWheather from 'components/CurrentWheather';
 import ForecastWheather from 'components/ForecastWheather';
 import FavoriteList from 'components/FavoriteList';
-import {fetchData, fetchDataForecast, fetchDataFavorite} from 'API'
+import {fetchData, fetchDataForecast, fetchDataFavorite, fetchDataGeo, fetchDataForecastGeo, coords} from 'API';
+
 
 export default class App extends React.Component {
 
     state = {
         weatherItems:[],
         weatherItemsForecast:[],
-        favoriteItems:[]
+        favoriteItems:[],
     };
 
     changeCity = city => {
@@ -54,16 +55,17 @@ export default class App extends React.Component {
     }
 
     componentWillMount = () => {
-        fetchData('Kiev', 'weather').then(data => {
-            this.setState({
-                weatherItems: data
-            });
-        });
-        fetchDataForecast('Kiev').then(data => {
-            this.setState({
-                weatherItemsForecast: data
-            });
-        });
+        coords()
+            .then(response => {
+                fetchDataGeo(...response).then(data => {
+                    this.setState({weatherItems: data});
+                });
+                fetchDataForecastGeo(...response).then(data => {
+                    this.setState({weatherItemsForecast: data});
+                });
+
+            })
+            .catch(response => console.error(response));
     }
 
     render() {

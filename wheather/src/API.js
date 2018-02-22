@@ -5,6 +5,85 @@ const key1 = 'ee60a56d516461352f04a28877459c45';
 // const key3 = '59707d5d75b7df6a99fa050f93b97357';
 // const key4 = 'ae0e49faca41d19122d478f130845486';
 
+// export function getCurrentCoord() {
+//     if (navigator.geolocation) {
+//         console.log('Geolocation is supported!');
+//         function geoSuccess(position) {
+//             let currentLat = Math.round(position.coords.latitude * 100) / 100;
+//             let currentLon = Math.round(position.coords.longitude * 100) / 100;
+//             localStorage.setItem('lat',currentLat);
+//             localStorage.setItem('lon',currentLon);
+//         }
+//         navigator.geolocation.getCurrentPosition(geoSuccess);
+//     }
+//     else console.log('Geolocation is not supported for this Browser/OS version yet.');
+// }
+
+export function coords() {
+    return new Promise(function (resolve, reject) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                resolve([position.coords.latitude, position.coords.longitude]);
+            });
+        } else {
+            reject("Сорян, чо-то не работает!");
+        }
+    })
+}
+
+export function fetchDataGeo (lat, lon) {  // возвращаем результат работы fetch
+    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${key1}`)
+        .then(response=>{
+            if(response.ok) return response.json();
+            throw new Error('Fetching error'+ response.statusText);
+        })
+        .then(data => {
+            //console.log(data.coord.lat);
+           // console.log(data.coord.lon);
+
+
+            const itemData = {
+                name: data.name,
+                temp: Math.round(data.main.temp-273),
+                humidity: data.main.humidity,
+                pressure: Math.round(data.main.pressure*0.75),
+                visibility: data.visibility/1000,
+                wind: data.wind.speed,
+                clouds: data.weather[0].description,
+                icon: `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
+            }
+
+            return itemData;
+        })
+        .catch(err => console.log(err));
+}
+
+export function fetchDataForecastGeo (lat, lon) {  // возвращаем результат работы fetch
+    return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=${key1}`)
+        .then(response=>{
+            if(response.ok) return response.json();
+            throw new Error('Fetching error'+ response.statusText);
+        })
+        .then(data => {
+            let forecast=[];
+            let dayWeather;
+            for(let i=0; i<40; i+=8) {
+                dayWeather = {
+                    date: data.list[i].dt_txt.slice(0,10),
+                    name: data.city.name,
+                    temp: Math.round(data.list[i].main.temp-273),
+                    humidity: data.list[i].main.humidity,
+                    pressure: Math.round(data.list[i].main.pressure*0.75),
+                    wind: data.list[i].wind.speed,
+                    clouds: data.list[i].weather[0].description,
+                    icon: `https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`
+                }
+                forecast.push(dayWeather);
+            }
+            return forecast;
+        })
+        .catch(err => console.log(err));
+}
 
 export function fetchData (city, period) {  // возвращаем результат работы fetch
   return fetch(`https://api.openweathermap.org/data/2.5/${period}?q=${city}&APPID=${key1}`)
@@ -13,6 +92,8 @@ export function fetchData (city, period) {  // возвращаем резуль
             throw new Error('Fetching error'+ response.statusText);
         })
         .then(data => {
+            // console.log(data.coord.lat);
+            // console.log(data.coord.lon);
             const itemData = {
                 name: data.name,
                 temp: Math.round(data.main.temp-273),
