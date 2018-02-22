@@ -5,20 +5,6 @@ const key1 = 'ee60a56d516461352f04a28877459c45';
 // const key3 = '59707d5d75b7df6a99fa050f93b97357';
 // const key4 = 'ae0e49faca41d19122d478f130845486';
 
-// export function getCurrentCoord() {
-//     if (navigator.geolocation) {
-//         console.log('Geolocation is supported!');
-//         function geoSuccess(position) {
-//             let currentLat = Math.round(position.coords.latitude * 100) / 100;
-//             let currentLon = Math.round(position.coords.longitude * 100) / 100;
-//             localStorage.setItem('lat',currentLat);
-//             localStorage.setItem('lon',currentLon);
-//         }
-//         navigator.geolocation.getCurrentPosition(geoSuccess);
-//     }
-//     else console.log('Geolocation is not supported for this Browser/OS version yet.');
-// }
-
 export function coords() {
     return new Promise(function (resolve, reject) {
         if (navigator.geolocation) {
@@ -38,10 +24,6 @@ export function fetchDataGeo (lat, lon) {  // возвращаем резуль�
             throw new Error('Fetching error'+ response.statusText);
         })
         .then(data => {
-            //console.log(data.coord.lat);
-           // console.log(data.coord.lon);
-
-
             const itemData = {
                 name: data.name,
                 temp: Math.round(data.main.temp-273),
@@ -52,7 +34,6 @@ export function fetchDataGeo (lat, lon) {  // возвращаем резуль�
                 clouds: data.weather[0].description,
                 icon: `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
             }
-
             return itemData;
         })
         .catch(err => console.log(err));
@@ -86,15 +67,13 @@ export function fetchDataForecastGeo (lat, lon) {  // возвращаем ре�
 }
 
 export function fetchData (city, period) {  // возвращаем результат работы fetch
-  return fetch(`https://api.openweathermap.org/data/2.5/${period}?q=${city}&APPID=${key1}`)
+    return fetch(`https://api.openweathermap.org/data/2.5/${period}?q=${city}&APPID=${key1}`)
         .then(response=>{
             if(response.ok) return response.json();
             throw new Error('Fetching error'+ response.statusText);
         })
         .then(data => {
-            // console.log(data.coord.lat);
-            // console.log(data.coord.lon);
-            const itemData = {
+            let itemData = {
                 name: data.name,
                 temp: Math.round(data.main.temp-273),
                 humidity: data.main.humidity,
@@ -104,7 +83,6 @@ export function fetchData (city, period) {  // возвращаем резуль
                 clouds: data.weather[0].description,
                 icon: `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
             }
-
             return itemData;
         })
         .catch(err => console.log(err));
@@ -152,5 +130,3 @@ export function fetchDataFavorite (city) {  // возвращаем резуль
         })
         .catch(err => console.log(err));
 }
-
-

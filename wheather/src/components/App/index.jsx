@@ -5,8 +5,8 @@ import SearchForm from 'components/SearchForm';
 import CurrentWheather from 'components/CurrentWheather';
 import ForecastWheather from 'components/ForecastWheather';
 import FavoriteList from 'components/FavoriteList';
+import Error from 'components/Error';
 import {fetchData, fetchDataForecast, fetchDataFavorite, fetchDataGeo, fetchDataForecastGeo, coords} from 'API';
-
 
 export default class App extends React.Component {
 
@@ -16,7 +16,7 @@ export default class App extends React.Component {
         favoriteItems:[],
     };
 
-    changeCity = city => {
+    changeCity = city => {      // changing for favorite list
         fetchData(city, 'weather').then(data => {
             this.setState({
                 weatherItems: data
@@ -29,25 +29,24 @@ export default class App extends React.Component {
         });
     }
 
-    onDeleteTodo = id => {
+    onDeleteTodo = id => {    // delete for favorite list
         this.setState({
             favoriteItems: this.state.favoriteItems.filter(post => post.id !== id)
         });
-        console.log(this.state.favoriteItems);
     }
 
-    currentFormSubmit = city => {
-        fetchData(city, 'weather').then(data => {
-            this.setState({
-                weatherItems: data
-            });
+    currentFormSubmit = city => {    // handle changing weather
+        fetchData(city, 'weather').then(data => {  // handle current changing weather
+                this.setState({
+                    weatherItems: data
+                });
         });
-        fetchDataForecast(city).then(data => {
+        fetchDataForecast(city).then(data => { // handle forecast changing weather
             this.setState({
                 weatherItemsForecast: data
             });
         });
-        fetchDataFavorite(city).then(data => {
+        fetchDataFavorite(city).then(data => { // adding to favorite weather
             this.setState({
                 favoriteItems: [...this.state.favoriteItems, data]
             });
@@ -55,21 +54,29 @@ export default class App extends React.Component {
     }
 
     componentWillMount = () => {
-        coords()
+        coords()              // defolt weather from geolocation
             .then(response => {
-                fetchDataGeo(...response).then(data => {
+                fetchDataGeo(...response).then(data => {  // defolt current weather
                     this.setState({weatherItems: data});
                 });
-                fetchDataForecastGeo(...response).then(data => {
+                fetchDataForecastGeo(...response).then(data => {  // defolt forecast weather
                     this.setState({weatherItemsForecast: data});
                 });
-
             })
             .catch(response => console.error(response));
     }
 
     render() {
         const {weatherItems, weatherItemsForecast, favoriteItems} = this.state;
+        console.log(this.state);
+        if(weatherItems === undefined || weatherItemsForecast === undefined) {
+            return (
+                <div className="container">
+                    <Header />
+                    <Error />
+                </div>
+            );
+        }
         return(
             <div className="container">
                 <Header />
