@@ -1,10 +1,15 @@
-.CurrentWheather {
+.current__weather {
     margin: 0 auto;
-    margin-top: 30px;
-    padding-left: 40px;
-    width: 250px;
-    border: 1px solid #cfcfcf;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 20px;
+    padding-left: 30px;
+    min-width: 300px;
+}
+.current__weather-name {
+    font-size: 30px;
+    color: #26A69A;
+}
+.current__weather-field {
+    font-size: 20px;
 }
 .WheatherPic {
     padding-left: 40px;

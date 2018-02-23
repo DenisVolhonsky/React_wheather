@@ -4,7 +4,7 @@ import './style.css';
 const FavoriteList = ({favoriteCity, onTodoClick, onChangeCity}) => {
     return(
         <div className="favorite">
-            <p className="favorite__title">FavoriteList</p>
+            <p className="favorite__title">Favorite list</p>
             <ul>
                 {favoriteCity.map(item =>
                     <li className='favorite__item' key={item.id} onClick={() => onChangeCity(item.name)}>

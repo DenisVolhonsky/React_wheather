@@ -1,0 +1,16 @@
+.footer {
+    position: fixed;
+    width: 100%;
+    max-width: inherit;
+    bottom: 0;
+    text-align: center;
+    background: #5C5757;
+}
+.footer__logo {
+    font-size: 23px;
+    color: #0C7ABF;
+    text-decoration: underline;
+}
+.footer>h1{
+    vertical-align: middle;
+}

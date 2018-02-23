@@ -1,11 +1,13 @@
 import React from 'react';
 import './style.css'
 import Header from 'components/Header';
-import SearchForm from 'components/SearchForm';
+import SearchBlock from 'components/SearchBlock';
+import SearchField from 'components/SearchField';
 import CurrentWheather from 'components/CurrentWheather';
 import ForecastWheather from 'components/ForecastWheather';
 import FavoriteList from 'components/FavoriteList';
 import Error from 'components/Error';
+import Footer from 'components/Footer';
 import {fetchData, fetchDataForecast, fetchDataFavorite, fetchDataGeo, fetchDataForecastGeo, coords} from 'API';
 
 export default class App extends React.Component {
@@ -16,7 +18,7 @@ export default class App extends React.Component {
         favoriteItems:[],
     };
 
-    changeCity = city => {      // changing for favorite list
+    changeCity = city => {
         fetchData(city, 'weather').then(data => {
             this.setState({
                 weatherItems: data
@@ -32,8 +34,7 @@ export default class App extends React.Component {
     onDeleteTodo = id => {    // delete for favorite list
         this.setState({
             favoriteItems: this.state.favoriteItems.filter(post => post.id !== id)
-    });
-
+        });
     }
 
     currentFormSubmit = city => {    // handle changing weather
@@ -74,22 +75,9 @@ export default class App extends React.Component {
 
     render() {
         const {weatherItems, weatherItemsForecast, favoriteItems} = this.state;
-      // console.log(favoriteItems);
-
-
         localStorage.setItem('favoriteItems',JSON.stringify(favoriteItems));
-
-        // console.log(favorite);
-        // console.log(JSON.parse(favorite));
-
-
-        //
-        // localStorage.setItem('storageFavItems',this.state.favoriteItems);
-        // const data = localStorage.getItem('storageFavItems');
-        // console.log(data);
-
-
         if(weatherItems === undefined || weatherItemsForecast === undefined) {
+            localStorage.setItem('favoriteItems','[]');
             return (
                 <div className="container">
                     <Header />
@@ -100,12 +88,17 @@ export default class App extends React.Component {
         return(
             <div className="container">
                 <Header />
-                <SearchForm getWheather={this.currentFormSubmit} />
-                <FavoriteList favoriteCity={favoriteItems} onTodoClick={this.onDeleteTodo} onChangeCity={this.changeCity}/>
-                <CurrentWheather {...weatherItems}/>
+                <div className="main__block">
+                    <SearchBlock>
+                        <SearchField getWheather={this.currentFormSubmit} />
+                        <FavoriteList favoriteCity={favoriteItems} onTodoClick={this.onDeleteTodo} onChangeCity={this.changeCity}/>
+                    </SearchBlock>
+                    <CurrentWheather {...weatherItems}/>
+                </div>
                 <div className="forecast__container">
                     {weatherItemsForecast.map(item => (<ForecastWheather key={item.date} {...item}/>))}
                 </div>
+                <Footer />
             </div>
         );
     }

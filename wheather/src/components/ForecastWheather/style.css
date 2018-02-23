@@ -1,10 +1,15 @@
 .ForecastWheather {
     margin: 0 auto;
-    margin-top: 30px;
+    margin-left: 0;
+    margin-bottom: 30px;
     padding-left: 30px;
     width: 200px;
-    border: 1px solid #cfcfcf;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border: 5px solid #EE6E73;
+    border-radius: 10px;
+    box-shadow: 8px 7px 14px 1px rgba(0,0,0,0.5);
+}
+.ForecastWheather:hover {
+    box-shadow: 4px 4px 14px 1px rgba(0,0,0,0.5);
 }
 .WheatherPic {
     padding-left: 40px;
@@ -13,5 +18,6 @@
     font-size: 12px;
 }
 .ForecastWheather__data {
+    font-weight: 700;
     color: #26A69A;
 }

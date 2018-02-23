@@ -4,7 +4,7 @@ import './style.css'
 const ForecastWheather = ({date, name, temp, humidity, pressure, wind, clouds, icon}) => {
     return(
         <div className="ForecastWheather">
-            <p className="ForecastWheather__data">Дата: <b>{date}</b></p>
+            <p className="ForecastWheather__data">{date}</p>
             <p className="ForecastWheather__field">Температура: <b>{temp}&deg;С</b></p>
             <p className="ForecastWheather__field">Влажность: <b>{humidity}%</b></p>
             <p className="ForecastWheather__field">Давление: <b>{pressure} кПа</b></p>

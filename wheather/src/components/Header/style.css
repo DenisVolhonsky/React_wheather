@@ -1,12 +1,12 @@
 .header {
     display: flex;
-    margin-bottom: 20px;
-    height: 60px;
-    border-bottom: 4px solid #26A69A;
+    margin-bottom: 50px;
+    padding-left: 10px;
+    height: 90px;
     justify-content: space-between;
     align-items: center;
+    background: #EE6E73;
 }
 .header__logo {
-    text-decoration: none;
-    color: #26A69A;
+    color: #fff;
 }
