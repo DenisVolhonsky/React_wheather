@@ -71,6 +71,7 @@ export default class App extends React.Component {
             .catch(response => console.error(response));
 
         let favorite = localStorage.getItem('favoriteItems'); // getting favorite city obj from LocalStorage
+        console.log('favorite'+ favorite );
             this.setState({
                 favoriteItems: JSON.parse(favorite)
             });

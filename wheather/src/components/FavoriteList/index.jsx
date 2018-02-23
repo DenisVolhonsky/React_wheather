@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './style.css';
 
 const FavoriteList = ({favoriteCity, onTodoClick, onChangeCity}) => {
-
+    console.log(favoriteCity);
     return(
         <div className="favorite">
             <p className="favorite__title">Favorite list</p>
@@ -18,9 +18,9 @@ const FavoriteList = ({favoriteCity, onTodoClick, onChangeCity}) => {
     );
 }
 
-FavoriteList.propTypes = {
-    onTodoClick: PropTypes.func.isRequired,
-    onChangeCity: PropTypes.func.isRequired,
-}
+// FavoriteList.propTypes = {
+//     onTodoClick: PropTypes.func.isRequired,
+//     onChangeCity: PropTypes.func.isRequired,
+// }
 
 export default FavoriteList;
