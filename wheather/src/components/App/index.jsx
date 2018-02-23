@@ -32,7 +32,8 @@ export default class App extends React.Component {
     onDeleteTodo = id => {    // delete for favorite list
         this.setState({
             favoriteItems: this.state.favoriteItems.filter(post => post.id !== id)
-        });
+    });
+
     }
 
     currentFormSubmit = city => {    // handle changing weather
@@ -64,11 +65,30 @@ export default class App extends React.Component {
                 });
             })
             .catch(response => console.error(response));
+
+        let favorite = localStorage.getItem('favoriteItems');
+            this.setState({
+                favoriteItems: JSON.parse(favorite)
+            });
     }
 
     render() {
         const {weatherItems, weatherItemsForecast, favoriteItems} = this.state;
-        console.log(this.state);
+      // console.log(favoriteItems);
+
+
+        localStorage.setItem('favoriteItems',JSON.stringify(favoriteItems));
+
+        // console.log(favorite);
+        // console.log(JSON.parse(favorite));
+
+
+        //
+        // localStorage.setItem('storageFavItems',this.state.favoriteItems);
+        // const data = localStorage.getItem('storageFavItems');
+        // console.log(data);
+
+
         if(weatherItems === undefined || weatherItemsForecast === undefined) {
             return (
                 <div className="container">
