@@ -1,11 +1,11 @@
-import v4 from 'uuid/v4';
+import v4 from 'uuid/v4';  // connect generator id
 
-const key1 = 'ee60a56d516461352f04a28877459c45';
+const key1 = 'ee60a56d516461352f04a28877459c45'; // API ID
 // const key2 = '5429d5cbe53b45e3e46e75a267463eb4';
 // const key3 = '59707d5d75b7df6a99fa050f93b97357';
 // const key4 = 'ae0e49faca41d19122d478f130845486';
 
-export function coords() {
+export function coords() {   // getting current position
     return new Promise(function (resolve, reject) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -17,13 +17,13 @@ export function coords() {
     })
 }
 
-export function fetchDataGeo (lat, lon) {  // возвращаем результат работы fetch
+export function fetchDataGeo (lat, lon) {  // fetching data from current position for current weather
     return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${key1}`)
         .then(response=>{
             if(response.ok) return response.json();
             throw new Error('Fetching error'+ response.statusText);
         })
-        .then(data => {
+        .then(data => {  // select fields in new obj
             const itemData = {
                 name: data.name,
                 temp: Math.round(data.main.temp-273),
@@ -34,12 +34,12 @@ export function fetchDataGeo (lat, lon) {  // возвращаем резуль�
                 clouds: data.weather[0].description,
                 icon: `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
             }
-            return itemData;
+            return itemData;                    // object weather
         })
         .catch(err => console.log(err));
 }
 
-export function fetchDataForecastGeo (lat, lon) {  // возвращаем результат работы fetch
+export function fetchDataForecastGeo (lat, lon) {  // fetching data from current position for forecast wheather
     return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=${key1}`)
         .then(response=>{
             if(response.ok) return response.json();
@@ -48,8 +48,8 @@ export function fetchDataForecastGeo (lat, lon) {  // возвращаем ре�
         .then(data => {
             let forecast=[];
             let dayWeather;
-            for(let i=0; i<40; i+=8) {
-                dayWeather = {
+            for(let i=0; i<40; i+=8) {                              // select 5 days forecast from data
+                dayWeather = {                                      // select fields in new obj
                     date: data.list[i].dt_txt.slice(0,10),
                     name: data.city.name,
                     temp: Math.round(data.list[i].main.temp-273),
@@ -59,21 +59,21 @@ export function fetchDataForecastGeo (lat, lon) {  // возвращаем ре�
                     clouds: data.list[i].weather[0].description,
                     icon: `https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`
                 }
-                forecast.push(dayWeather);
+                forecast.push(dayWeather); // filling array for 5 days
             }
             return forecast;
         })
         .catch(err => console.log(err));
 }
 
-export function fetchData (city, period) {  // возвращаем результат работы fetch
+export function fetchData (city, period) {  // fetching data from selected city position for current wheather
     return fetch(`https://api.openweathermap.org/data/2.5/${period}?q=${city}&APPID=${key1}`)
         .then(response=>{
             if(response.ok) return response.json();
             throw new Error('Fetching error'+ response.statusText);
         })
         .then(data => {
-            let itemData = {
+            let itemData = {  // data obj
                 name: data.name,
                 temp: Math.round(data.main.temp-273),
                 humidity: data.main.humidity,
@@ -88,16 +88,16 @@ export function fetchData (city, period) {  // возвращаем резуль
         .catch(err => console.log(err));
 }
 
-export function fetchDataForecast (city) {  // возвращаем результат работы fetch
+export function fetchDataForecast (city) {  // fetching data from selected city position for 5 day forecast wheather
     return fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=${key1}`)
         .then(response=>{
             if(response.ok) return response.json();
-            throw new Error('Fetching error'+ response.statusText);
+            throw new Error('Fetching error'+ response.statusText); //
         })
         .then(data => {
             let forecast=[];
             let dayWeather;
-            for(let i=0; i<40; i+=8) {
+            for(let i=0; i<40; i+=8) {   // select 5 days forecast from data
                 dayWeather = {
                     date: data.list[i].dt_txt.slice(0,10),
                     name: data.city.name,
@@ -115,7 +115,7 @@ export function fetchDataForecast (city) {  // возвращаем резуль
         .catch(err => console.log(err));
 }
 
-export function fetchDataFavorite (city) {  // возвращаем результат работы fetch
+export function fetchDataFavorite (city) {   // fetching data for favorit cities
     return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${key1}`)
         .then(response=>{
             if(response.ok) return response.json();

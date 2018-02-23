@@ -6,19 +6,22 @@ import SearchField from 'components/SearchField';
 import CurrentWheather from 'components/CurrentWheather';
 import ForecastWheather from 'components/ForecastWheather';
 import FavoriteList from 'components/FavoriteList';
-import Error from 'components/Error';
+import Error from 'components/Error';  // display error component
 import Footer from 'components/Footer';
+
+////////getting data from API////
 import {fetchData, fetchDataForecast, fetchDataFavorite, fetchDataGeo, fetchDataForecastGeo, coords} from 'API';
+/////////////////////////////////
 
 export default class App extends React.Component {
 
     state = {
         weatherItems:[],
         weatherItemsForecast:[],
-        favoriteItems:[],
+        favoriteItems:[]
     };
 
-    changeCity = city => {
+    changeCity = city => {  // change city from favorite fist
         fetchData(city, 'weather').then(data => {
             this.setState({
                 weatherItems: data
@@ -50,7 +53,7 @@ export default class App extends React.Component {
         });
         fetchDataFavorite(city).then(data => { // adding to favorite weather
             this.setState({
-                favoriteItems: [...this.state.favoriteItems, data]
+                favoriteItems: [...this.state.favoriteItems, data] //filling array of objects
             });
         });
     }
@@ -67,15 +70,17 @@ export default class App extends React.Component {
             })
             .catch(response => console.error(response));
 
-        let favorite = localStorage.getItem('favoriteItems');
+        let favorite = localStorage.getItem('favoriteItems'); // getting favorite city obj from LocalStorage
             this.setState({
                 favoriteItems: JSON.parse(favorite)
             });
     }
 
     render() {
-        const {weatherItems, weatherItemsForecast, favoriteItems} = this.state;
-        localStorage.setItem('favoriteItems',JSON.stringify(favoriteItems));
+        const {weatherItems, weatherItemsForecast, favoriteItems} = this.state; // destructuring this.state
+        localStorage.setItem('favoriteItems',JSON.stringify(favoriteItems));  // set data from Local Storage
+
+       ///////////////error processing and displaying message///////////////
         if(weatherItems === undefined || weatherItemsForecast === undefined) {
             localStorage.setItem('favoriteItems','[]');
             return (
@@ -85,6 +90,7 @@ export default class App extends React.Component {
                 </div>
             );
         }
+        ////////////////////////////building page//////////////////////////////
         return(
             <div className="container">
                 <Header />
