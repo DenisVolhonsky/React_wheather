@@ -99,12 +99,12 @@ export default class App extends React.Component {
                 });
                 fetchDataFavoriteGeo(...response).then(data => {  // defolt favorite weather
 
-                  // let arr =[...JSON.parse(favorite),data];
-                  // let uniqe=arr.filter((item, index, self) =>
-                  //     index === self.findIndex(t =>  t.name === item.name)
-                  // );
-                  //   this.setState({favoriteItems: uniqe});  //data is object
-                     this.setState({favoriteItems: [...JSON.parse(favorite),data]});  //data is object
+                  let arr =[...JSON.parse(favorite),data];
+                  let uniqe=arr.filter((item, index, self) =>
+                      index === self.findIndex(t =>  t.name === item.name)
+                  );
+                    this.setState({favoriteItems: uniqe});  //data is object
+                     //this.setState({favoriteItems: [...JSON.parse(favorite),data]});  //data is object
                 });
             })
             .catch(response => console.error(response));

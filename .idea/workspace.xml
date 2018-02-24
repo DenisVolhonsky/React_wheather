@@ -30,8 +30,8 @@
       <file leaf-file-name="index.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wheather/src/components/App/index.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="579">
-              <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+            <state relative-caret-position="239">
+              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="105" selection-end-column="76" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -165,38 +165,7 @@
               <item name="React_wheather" type="b2602c69:ProjectViewProjectNode" />
               <item name="React_wheather" type="462c0819:PsiDirectoryNode" />
               <item name="wheather" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="React_wheather" type="b2602c69:ProjectViewProjectNode" />
-              <item name="React_wheather" type="462c0819:PsiDirectoryNode" />
-              <item name="wheather" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="React_wheather" type="b2602c69:ProjectViewProjectNode" />
-              <item name="React_wheather" type="462c0819:PsiDirectoryNode" />
-              <item name="wheather" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="App" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="React_wheather" type="b2602c69:ProjectViewProjectNode" />
-              <item name="React_wheather" type="462c0819:PsiDirectoryNode" />
-              <item name="wheather" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="CurrentWheather" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="React_wheather" type="b2602c69:ProjectViewProjectNode" />
-              <item name="React_wheather" type="462c0819:PsiDirectoryNode" />
-              <item name="wheather" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="FavoriteList" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -250,12 +219,12 @@
       <workItem from="1519118928603" duration="20336000" />
       <workItem from="1519147571226" duration="788000" />
       <workItem from="1519415621185" duration="3644000" />
-      <workItem from="1519419356787" duration="20317000" />
+      <workItem from="1519419356787" duration="20723000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83049000" />
+    <option name="totallyTimeSpent" value="83455000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-331" width="1936" height="1056" extended-state="6" />
@@ -576,8 +545,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wheather/src/components/App/index.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="579">
-          <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+        <state relative-caret-position="239">
+          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="105" selection-end-column="76" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
