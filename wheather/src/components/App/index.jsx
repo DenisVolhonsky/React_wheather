@@ -10,7 +10,7 @@ import Error from 'components/Error';  // display error component
 import Footer from 'components/Footer';
 
 ////////getting data from API////
-import {fetchData, fetchDataForecast, fetchDataFavorite, fetchDataGeo, fetchDataForecastGeo, coords} from 'API';
+import {fetchData, fetchDataForecast, fetchDataFavorite, fetchDataGeo, fetchDataForecastGeo, fetchDataFavoriteGeo, coords} from 'API';
 /////////////////////////////////
 
 export default class App extends React.Component {
@@ -42,9 +42,9 @@ export default class App extends React.Component {
 
     currentFormSubmit = city => {    // handle changing weather
         fetchData(city, 'weather').then(data => {  // handle current changing weather
-                this.setState({
-                    weatherItems: data
-                });
+            this.setState({
+                weatherItems: data
+            });
         });
         fetchDataForecast(city).then(data => { // handle forecast changing weather
             this.setState({
@@ -53,12 +53,32 @@ export default class App extends React.Component {
         });
         fetchDataFavorite(city).then(data => { // adding to favorite weather
             this.setState({
+                // favoriteItems: [...this.state.favoriteItems, data] //filling array of objects
                 favoriteItems: [...this.state.favoriteItems, data] //filling array of objects
             });
         });
     }
-
+////////////////////////////////////////with loading////////////////////////////////////////////////////
     componentWillMount = () => {
+
+        let favorite = localStorage.getItem('favoriteItems'); // getting favorite city obj from LocalStorage
+        console.log(JSON.parse(favorite));
+        //this.setState({favoriteItems: JSON.parse(favorite)});
+        //localStorage.setItem('favoriteItems',JSON.stringify(favorite));
+
+        // var strings = [{name:"кришна"}, {name:"кришна"}, {name:"[fht"}];
+        // var uniqArray;
+        //
+        // uniqArray = strings.filter((item, index, self) =>
+        //     index === self.findIndex(t =>  t.name === item.name)
+        // );
+        //
+        // alert( uniqArray );
+
+
+
+
+
         coords()              // defolt weather from geolocation
             .then(response => {
                 fetchDataGeo(...response).then(data => {  // defolt current weather
@@ -67,27 +87,57 @@ export default class App extends React.Component {
                 fetchDataForecastGeo(...response).then(data => {  // defolt forecast weather
                     this.setState({weatherItemsForecast: data});
                 });
+                fetchDataFavoriteGeo(...response).then(data => {  // defolt favorite weather
+
+                  let uniqArray =[...JSON.parse(favorite),data];
+                  let a=uniqArray.filter((item, index, self) =>
+                      index === self.findIndex(t =>  t.name === item.name)
+                  );
+                    this.setState({favoriteItems: a});  //data is object
+                    // this.setState({favoriteItems: [...JSON.parse(favorite),data]});  //data is object
+                });
             })
             .catch(response => console.error(response));
 
-        let favorite = localStorage.getItem('favoriteItems'); // getting favorite city obj from LocalStorage
-        console.log('favorite'+ favorite );
-            this.setState({
-                favoriteItems: JSON.parse(favorite)
-            });
+
+
+        // localStorage.setItem('favoriteItems',JSON.stringify(this.state.favoriteItems));
+        // let favorite = localStorage.getItem('favoriteItems'); // getting favorite city obj from LocalStorage
+        // this.setState({favoriteItems: JSON.parse(favorite)});
     }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
     render() {
         const {weatherItems, weatherItemsForecast, favoriteItems} = this.state; // destructuring this.state
+
+
+        // console.log('weatherItems:'+ this.state.weatherItems );
+        // console.log('weatherItemsForecast:' + this.state.weatherItemsForecast);
+        //console.log('favoriteItems:'+ this.state.favoriteItems);
+
         localStorage.setItem('favoriteItems',JSON.stringify(favoriteItems));  // set data from Local Storage
 
-       ///////////////error processing and displaying message///////////////
+        //let favorite = localStorage.getItem('favoriteItems'); // getting favorite city obj from LocalStorage
+
+        //this.setState({favoriteItems: JSON.parse(favorite)});
+        //console.log(this.state.favoriteItems);
+
+
+        //this.setState({favoriteItems: JSON.parse(favorite)});
+
+
+        // console.log('weatherItems:'+ weatherItems );
+        // console.log('weatherItemsForecast:' + weatherItemsForecast);
+        // console.log('favoriteItems:'+ favoriteItems);
+
+        ///////////////error processing and displaying message///////////////
         if(weatherItems === undefined || weatherItemsForecast === undefined) {
-            localStorage.setItem('favoriteItems','[]');
+           localStorage.setItem('favoriteItems','[]');
             return (
                 <div className="container">
                     <Header />
                     <Error />
+                    <Footer />
                 </div>
             );
         }
@@ -110,3 +160,4 @@ export default class App extends React.Component {
         );
     }
 }
+

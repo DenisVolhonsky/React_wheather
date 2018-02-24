@@ -3,7 +3,6 @@ import React from 'react';
 import './style.css';
 
 const FavoriteList = ({favoriteCity, onTodoClick, onChangeCity}) => {
-    console.log(favoriteCity);
     return(
         <div className="favorite">
             <p className="favorite__title">Favorite list</p>

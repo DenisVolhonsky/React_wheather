@@ -6,10 +6,12 @@
 .main__block {
     display: flex;
     flex-wrap: wrap;
+    padding-left: 25px;
     margin-bottom: 50px;
 }
 .forecast__container {
     margin-bottom: 100px;
+    padding-left: 25px;
     display: flex;
     flex-wrap: wrap;
 }

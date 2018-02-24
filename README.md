@@ -1,4 +1,4 @@
-# React_weather
+# React_wheather
 
 Ссылка на сайт: https://denisvolhonsky.github.io/React_wheather/wheather/build/
 

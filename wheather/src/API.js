@@ -130,3 +130,19 @@ export function fetchDataFavorite (city) {   // fetching data for favorit cities
         })
         .catch(err => console.log(err));
 }
+
+export function fetchDataFavoriteGeo (lat, lon) {   // fetching data for favorite cities from GEO
+    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${key1}`)
+        .then(response=>{
+            if(response.ok) return response.json();
+            throw new Error('Fetching error'+ response.statusText);
+        })
+        .then(data => {
+            let favoriteItemGeo = {
+                id: v4(),
+                name: data.name
+            }
+            return favoriteItemGeo;
+        })
+        .catch(err => console.log(err));
+}
