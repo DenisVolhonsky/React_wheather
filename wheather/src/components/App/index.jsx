@@ -52,17 +52,27 @@ export default class App extends React.Component {
             });
         });
         fetchDataFavorite(city).then(data => { // adding to favorite weather
-            this.setState({
-                // favoriteItems: [...this.state.favoriteItems, data] //filling array of objects
-                favoriteItems: [...this.state.favoriteItems, data] //filling array of objects
-            });
+            // this.setState({
+            //     // favoriteItems: [...this.state.favoriteItems, data] //filling array of objects
+            //     favoriteItems: [...this.state.favoriteItems, data] //filling array of objects
+            // });
+
+            let arr =[...this.state.favoriteItems, data];
+            let uniqe=arr.filter((item, index, self) =>
+                index === self.findIndex(t =>  t.name === item.name)
+            );
+            this.setState({favoriteItems: uniqe});  //data is object
+
         });
+
+
+
     }
 ////////////////////////////////////////with loading////////////////////////////////////////////////////
     componentWillMount = () => {
 
         let favorite = localStorage.getItem('favoriteItems'); // getting favorite city obj from LocalStorage
-        console.log(JSON.parse(favorite));
+        //console.log(JSON.parse(favorite));
         //this.setState({favoriteItems: JSON.parse(favorite)});
         //localStorage.setItem('favoriteItems',JSON.stringify(favorite));
 
@@ -89,12 +99,12 @@ export default class App extends React.Component {
                 });
                 fetchDataFavoriteGeo(...response).then(data => {  // defolt favorite weather
 
-                  let uniqArray =[...JSON.parse(favorite),data];
-                  let a=uniqArray.filter((item, index, self) =>
-                      index === self.findIndex(t =>  t.name === item.name)
-                  );
-                    this.setState({favoriteItems: a});  //data is object
-                    // this.setState({favoriteItems: [...JSON.parse(favorite),data]});  //data is object
+                  // let arr =[...JSON.parse(favorite),data];
+                  // let uniqe=arr.filter((item, index, self) =>
+                  //     index === self.findIndex(t =>  t.name === item.name)
+                  // );
+                  //   this.setState({favoriteItems: uniqe});  //data is object
+                     this.setState({favoriteItems: [...JSON.parse(favorite),data]});  //data is object
                 });
             })
             .catch(response => console.error(response));
