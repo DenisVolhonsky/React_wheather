@@ -20,7 +20,7 @@ export default class App extends React.Component {
         weatherItemsForecast:[],
         favoriteItems:[]
     };
-
+/////////////////////////handle fav list///////////////////////////////////////////////
     changeCity = city => {  // change city from favorite fist
         fetchData(city, 'weather').then(data => {
             this.setState({
@@ -39,7 +39,7 @@ export default class App extends React.Component {
             favoriteItems: this.state.favoriteItems.filter(post => post.id !== id)
         });
     }
-
+//////////////////////////////handle change///////////////////////////////////////////
     currentFormSubmit = city => {    // handle changing weather
         fetchData(city, 'weather').then(data => {  // handle current changing weather
             this.setState({
@@ -52,42 +52,18 @@ export default class App extends React.Component {
             });
         });
         fetchDataFavorite(city).then(data => { // adding to favorite weather
-            // this.setState({
-            //     // favoriteItems: [...this.state.favoriteItems, data] //filling array of objects
             //     favoriteItems: [...this.state.favoriteItems, data] //filling array of objects
-            // });
-
             let arr =[...this.state.favoriteItems, data];
             let uniqe=arr.filter((item, index, self) =>
                 index === self.findIndex(t =>  t.name === item.name)
             );
             this.setState({favoriteItems: uniqe});  //data is object
-
         });
-
-
-
     }
 ////////////////////////////////////////with loading////////////////////////////////////////////////////
     componentWillMount = () => {
 
         let favorite = localStorage.getItem('favoriteItems'); // getting favorite city obj from LocalStorage
-        //console.log(JSON.parse(favorite));
-        //this.setState({favoriteItems: JSON.parse(favorite)});
-        //localStorage.setItem('favoriteItems',JSON.stringify(favorite));
-
-        // var strings = [{name:"кришна"}, {name:"кришна"}, {name:"[fht"}];
-        // var uniqArray;
-        //
-        // uniqArray = strings.filter((item, index, self) =>
-        //     index === self.findIndex(t =>  t.name === item.name)
-        // );
-        //
-        // alert( uniqArray );
-
-
-
-
 
         coords()              // defolt weather from geolocation
             .then(response => {
@@ -108,41 +84,17 @@ export default class App extends React.Component {
                 });
             })
             .catch(response => console.error(response));
-
-
-
-        // localStorage.setItem('favoriteItems',JSON.stringify(this.state.favoriteItems));
-        // let favorite = localStorage.getItem('favoriteItems'); // getting favorite city obj from LocalStorage
-        // this.setState({favoriteItems: JSON.parse(favorite)});
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
     render() {
         const {weatherItems, weatherItemsForecast, favoriteItems} = this.state; // destructuring this.state
 
-
-        // console.log('weatherItems:'+ this.state.weatherItems );
-        // console.log('weatherItemsForecast:' + this.state.weatherItemsForecast);
-        //console.log('favoriteItems:'+ this.state.favoriteItems);
-
         localStorage.setItem('favoriteItems',JSON.stringify(favoriteItems));  // set data from Local Storage
-
-        //let favorite = localStorage.getItem('favoriteItems'); // getting favorite city obj from LocalStorage
-
-        //this.setState({favoriteItems: JSON.parse(favorite)});
-        //console.log(this.state.favoriteItems);
-
-
-        //this.setState({favoriteItems: JSON.parse(favorite)});
-
-
-        // console.log('weatherItems:'+ weatherItems );
-        // console.log('weatherItemsForecast:' + weatherItemsForecast);
-        // console.log('favoriteItems:'+ favoriteItems);
 
         ///////////////error processing and displaying message///////////////
         if(weatherItems === undefined || weatherItemsForecast === undefined) {
-           localStorage.setItem('favoriteItems','[]');
+           //localStorage.setItem('favoriteItems','[]');
             return (
                 <div className="container">
                     <Header />
